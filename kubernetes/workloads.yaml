@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: openapi-petstore-deployment
+  namespace: openapi-petstore
+spec:
+  selector:
+    matchLabels:
+      app: openapi-petstore
+  template:
+    metadata:
+      labels:
+        app: openapi-petstore
+    spec:
+      containers:
+        - name: openapi-petstore
+          image: 787447617781.dkr.ecr.ap-southeast-1.amazonaws.com/test:latest
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "0.5"
+            limits:
+              memory: "512Mi"
+              cpu: "0.5"
+          ports:
+            - containerPort: 8080
