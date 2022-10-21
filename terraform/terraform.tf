@@ -1,8 +1,8 @@
 terraform {
   backend "s3" {
-    bucket = "terraform-state-openapi-petstore"
-    key = "terraform.tfstate"
-    region = "ap-southeast-1"
+    bucket         = "terraform-state-openapi-petstore"
+    key            = "terraform.tfstate"
+    region         = "ap-southeast-1"
     dynamodb_table = "terraform-state-locking-openapi-petstore"
   }
 
@@ -10,6 +10,11 @@ terraform {
     aws = {
       source  = "hashicorp/aws"
       version = "~> 4.34"
+    }
+
+    random = {
+      source  = "hashicorp/random"
+      version = "3.4.3"
     }
   }
 
