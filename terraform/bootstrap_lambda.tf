@@ -65,5 +65,5 @@ data "aws_lambda_invocation" "bootstrap" {
 }
 JSON
 
-  depends_on = [aws_lambda_function.bootstrap]
+  depends_on = [aws_lambda_function.bootstrap, module.eks.fargate_profiles]
 }

@@ -13,7 +13,7 @@ module "aws_load_balancer_controller_role" {
   }
 }
 
-resource "helm_release" "aws-load-balancer-controller" {
+resource "helm_release" "aws_load_balancer_controller" {
   chart      = "aws-load-balancer-controller"
   name       = "aws-load-balancer-controller"
   repository = "https://aws.github.io/eks-charts"
@@ -49,4 +49,6 @@ resource "helm_release" "aws-load-balancer-controller" {
     name  = "vpcId"
     value = module.vpc.vpc_id
   }
+
+  depends_on = [module.eks.fargate_profiles]
 }
