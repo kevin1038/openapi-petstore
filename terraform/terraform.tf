@@ -2,13 +2,23 @@ terraform {
   required_version = "1.3.2"
 
   required_providers {
+    archive = {
+      version = "2.2.0"
+    }
+
     aws = {
-      source  = "hashicorp/aws"
-      version = "4.36.1"
+      version = "4.37.0"
+    }
+
+    helm = {
+      version = "2.7.1"
+    }
+
+    kubernetes = {
+      version = "2.14.0"
     }
 
     random = {
-      source  = "hashicorp/random"
       version = "3.4.3"
     }
   }
@@ -18,6 +28,6 @@ terraform {
     key            = "terraform.tfstate"
     region         = "ap-southeast-1"
     dynamodb_table = "terraform-state-locking-openapi-petstore"
-    encrypt = true
+    encrypt        = true
   }
 }

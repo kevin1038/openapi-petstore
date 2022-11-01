@@ -6,7 +6,7 @@ module "eks" {
   cluster_version = "1.23"
 
   vpc_id     = module.vpc.vpc_id
-  subnet_ids = module.vpc.private_subnets
+  subnet_ids = concat(module.vpc.public_subnets, module.vpc.private_subnets)
 
   fargate_profiles = {
     openapi_petstore = {
@@ -14,16 +14,15 @@ module "eks" {
       selectors = [
         {
           namespace = "openapi-petstore"
-        }
-      ]
-    },
-    kube_system = {
-      name      = "kube-system"
-      selectors = [
+        },
+        {
+          namespace = "default"
+        },
         {
           namespace = "kube-system"
         }
       ]
+      subnet_ids = module.vpc.private_subnets
     }
   }
 }
@@ -35,4 +34,8 @@ locals {
 resource "random_string" "suffix" {
   length  = 8
   special = false
+}
+
+data "aws_eks_cluster_auth" "cluster" {
+  name = module.eks.cluster_id
 }
