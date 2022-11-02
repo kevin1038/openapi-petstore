@@ -10,7 +10,7 @@ module "eks" {
 
   fargate_profiles = {
     openapi_petstore = {
-      name      = "openapi-petstore"
+      name = "openapi-petstore"
       selectors = [
         {
           namespace = "openapi-petstore"
