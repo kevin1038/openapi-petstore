@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: openapi-petstore
-          image: 787447617781.dkr.ecr.ap-southeast-1.amazonaws.com/test:latest
+          image: 787447617781.dkr.ecr.ap-southeast-1.amazonaws.com/openapi-petstore:IMAGE_TAG
           resources:
             requests:
               memory: "512Mi"
