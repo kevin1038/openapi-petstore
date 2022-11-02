@@ -28,12 +28,7 @@ module "eks" {
 }
 
 locals {
-  cluster_name = "openapi-petstore-${random_string.suffix.result}"
-}
-
-resource "random_string" "suffix" {
-  length  = 8
-  special = false
+  cluster_name = "openapi-petstore"
 }
 
 data "aws_eks_cluster_auth" "cluster" {

@@ -17,10 +17,6 @@ terraform {
     kubernetes = {
       version = "2.14.0"
     }
-
-    random = {
-      version = "3.4.3"
-    }
   }
 
   backend "s3" {
