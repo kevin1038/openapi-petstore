@@ -108,3 +108,28 @@ jobs:
         run: |
           sed -ie 's/IMAGE_TAG/${{ github.sha }}/g' workloads.yaml
           kubectl apply -f .
+
+  snyk: 
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        files:
+          - terraform
+          - kubernetes
+          
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Run Snyk to check configuration files for security issues
+        uses: snyk/actions/iac@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          file: ${{ matrix.files }}
+        continue-on-error: true
+      
+      - name: Upload result to GitHub Code Scanning
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: snyk.sarif
