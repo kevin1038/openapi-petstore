@@ -116,12 +116,6 @@ jobs:
       contents: read
       security-events: write
       actions: read
-      
-    strategy:
-      matrix:
-        files:
-          - terraform
-          - kubernetes
           
     steps:
       - uses: actions/checkout@v3
@@ -131,7 +125,7 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          file: ${{ matrix.files }}
+          file: .
         continue-on-error: true
       
       - name: Upload result to GitHub Code Scanning
