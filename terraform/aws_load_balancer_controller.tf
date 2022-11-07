@@ -42,7 +42,7 @@ resource "helm_release" "aws_load_balancer_controller" {
 
   set {
     name  = "region"
-    value = var.region
+    value = data.aws_region.current.name
   }
 
   set {
