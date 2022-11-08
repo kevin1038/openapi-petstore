@@ -1,21 +1,21 @@
 terraform {
-  required_version = "1.3.3"
+  required_version = "~>1.3.0"
 
   required_providers {
     archive = {
-      version = "2.2.0"
+      version = "~>2.2.0"
     }
 
     aws = {
-      version = "4.37.0"
+      version = "~>4.38.0"
     }
 
     helm = {
-      version = "2.7.1"
+      version = "~>2.7.0"
     }
 
     kubernetes = {
-      version = "2.14.0"
+      version = "~>2.15.0"
     }
   }
 
