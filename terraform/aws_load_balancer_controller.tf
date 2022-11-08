@@ -1,6 +1,6 @@
 module "aws_load_balancer_controller_role" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
-  version = "5.5.4"
+  version = "~>5.5.0"
 
   role_name                              = "aws-load-balancer-controller"
   attach_load_balancer_controller_policy = true
