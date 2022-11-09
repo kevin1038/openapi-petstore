@@ -9,19 +9,19 @@ module "eks" {
   subnet_ids = concat(module.vpc.public_subnets, module.vpc.private_subnets)
 
   fargate_profiles = {
-    openapi_petstore = {
+    defaultfp = {
       selectors = [
         {
           namespace = "openapi-petstore"
         },
         {
-          namespace = "default"
+          namespace = "kube-system"
         },
         {
-          namespace = "kube-system"
+          namespace = "prometheus"
         }
       ]
-      name            = "openapi-petstore"
+      name            = "defaultfp"
       subnet_ids      = module.vpc.private_subnets
       create_iam_role = false
       iam_role_arn    = aws_iam_role.fargate_pod_execution_role.arn
