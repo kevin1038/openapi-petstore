@@ -10,7 +10,9 @@ permissions:
 jobs:
   destroy:
     runs-on: ubuntu-latest
-    
+    env:
+      AWS_REGION: ap-southeast-1
+
     steps:
     - uses: actions/checkout@v3
     
@@ -18,10 +20,10 @@ jobs:
       uses: aws-actions/configure-aws-credentials@v1
       with:
         role-to-assume: ${{ secrets.AWS_GITHUB_OIDC_ROLE_ARN }}
-        aws-region: ap-southeast-1
+        aws-region: ${{ env.AWS_REGION }}
 
     - name: Configure kubectl
-      run: aws eks update-kubeconfig --name openapi-petstore --region ap-southeast-1
+      run: aws eks update-kubeconfig --name openapi-petstore --region ${{ env.AWS_REGION }}
 
     - name: Destroy Kubernetes
       run: kubectl delete -f .
@@ -31,7 +33,7 @@ jobs:
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2
       with:
-        terraform_version: 1.3.3
+        terraform_version: 1.3.4
       
     - name: Terraform Init
       run: terraform init
@@ -40,3 +42,7 @@ jobs:
     - name: Terraform Destroy
       run: terraform destroy -auto-approve
       working-directory: terraform
+      env:
+        TF_VAR_aws_region: ${{ env.AWS_REGION }}
+        TF_VAR_aws_opensearch_allow_ip: ${{ secrets.AWS_OPENSEARCH_ALLOW_IP }}
+        TF_VAR_aws_grafana_sso_user_email: ${{ secrets.AWS_GRAFANA_SSO_USER_EMAIL }}

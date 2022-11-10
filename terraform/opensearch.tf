@@ -43,7 +43,7 @@ resource "aws_opensearch_domain_policy" "opensearch" {
         "Principal" : "*",
         "Effect" : "Allow",
         "Condition" : {
-          "IpAddress" : { "aws:SourceIp" : "${var.opensearch_allow_ip}" }
+          "IpAddress" : { "aws:SourceIp" : "${var.aws_opensearch_allow_ip}" }
         },
         "Resource" : "${aws_opensearch_domain.opensearch.arn}/*"
       }
