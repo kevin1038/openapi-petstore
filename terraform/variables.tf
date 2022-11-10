@@ -9,3 +9,8 @@ variable "opensearch_allow_ip" {
   type        = string
   default     = "0.0.0.0/0"
 }
+
+variable "aws_grafana_sso_user_email" {
+  description = "Admin user for Grafana"
+  type        = string
+}
