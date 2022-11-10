@@ -17,7 +17,7 @@ jobs:
   provision:
     runs-on: ubuntu-latest
     env:
-      TF_VAR_aws_region: $AWS_REGION
+      TF_VAR_aws_region: "$AWS_REGION"
       TF_VAR_aws_opensearch_allow_ip: ${{ secrets.AWS_OPENSEARCH_ALLOW_IP }}
       TF_VAR_aws_grafana_sso_user_email: ${{ secrets.AWS_GRAFANA_SSO_USER_EMAIL }}
 
