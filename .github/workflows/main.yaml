@@ -16,7 +16,11 @@ env:
 jobs:
   provision:
     runs-on: ubuntu-latest
-    
+    env:
+      TF_VAR_aws_region: ${{ env.AWS_REGION }}
+      TF_VAR_aws_opensearch_allow_ip: ${{ secrets.AWS_OPENSEARCH_ALLOW_IP }}
+      TF_VAR_aws_grafana_sso_user_email: ${{ secrets.AWS_GRAFANA_SSO_USER_EMAIL }}
+
     defaults:
       run:
         working-directory: terraform
@@ -51,10 +55,6 @@ jobs:
     - name: Terraform Apply
       if: github.ref == 'refs/heads/master' && github.event_name == 'push'
       run: terraform apply -auto-approve -input=false
-      env:
-        TF_VAR_aws_region: ${{ env.AWS_REGION }}
-        TF_VAR_aws_opensearch_allow_ip: ${{ secrets.AWS_OPENSEARCH_ALLOW_IP }}
-        TF_VAR_aws_grafana_sso_user_email: ${{ secrets.AWS_GRAFANA_SSO_USER_EMAIL }}
 
   build:
     runs-on: ubuntu-latest
